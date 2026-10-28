@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bryan's creative portfolio featuring art, photography, and games.">
+  <title>Bryan | Creative Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#home">B<span>.</span></a>
+
+    <button class="menu-toggle" aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-link active" href="#home">Home</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#art">Art</a>
+      <a class="nav-link" href="#photography">Photography</a>
+      <a class="nav-link" href="#games">Games</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">ARTIST · PHOTOGRAPHER · GAME DESIGNER</p>
+        <h1>Hey, I'm Bryan.<br>
+          Welcome to my <span class="gradient-text">creative world.</span>
+        </h1>
+        <p class="hero-description">
+          I create art, capture moments, and build interactive experiences.
+          Take a look around and see what I've been working on.
+        </p>
+        <div class="hero-buttons">
+          <a class="button primary" href="#art">Explore my work ↗</a>
+          <a class="button secondary" href="#about">A little about me</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="hero-symbol">B<span>.</span></div>
+        <span class="floating-tag tag-top">✦ Creative ideas</span>
+        <span class="floating-tag tag-bottom">Made with curiosity</span>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <p class="eyebrow">GET TO KNOW ME</p>
+      <h2>A little about <span class="gradient-text">me.</span></h2>
+      <p class="section-description">
+        I'm a creative who enjoys bringing ideas to life through visuals,
+        storytelling, and interactive design. I like experimenting,
+        learning new tools, and finding the details that make a project
+        feel personal.
+      </p>
+    </section>
+
+    <section class="section work-section" id="art">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT I CREATE</p>
+          <h2>Explore my <span class="gradient-text">work.</span></h2>
+        </div>
+        <p class="muted">A collection of things I've made and learned.</p>
+      </div>
+
+      <div class="work-grid">
+        <a class="work-card" href="#art-gallery">
+          <div class="card-art art-preview">
+            <span class="preview-symbol">✳</span>
+            <span class="preview-label">01 / VISUAL ART</span>
+          </div>
+          <div class="card-info">
+            <div><h3>Art & Design</h3>
+              <p>Illustration, portraits, and digital work.</p></div>
+            <span class="card-arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="work-card" href="#photo-gallery" id="photography">
+          <div class="card-art photo-preview">
+            <span class="preview-symbol">◎</span>
+            <span class="preview-label">02 / PHOTOGRAPHY</span>
+          </div>
+          <div class="card-info">
+            <div><h3>Photography</h3>
+              <p>Real moments, people, and places.</p></div>
+            <span class="card-arrow">↗</span>
+          </div>
+        </a>
+
+        <a class="work-card" href="#game-gallery" id="games">
+          <div class="card-art game-preview">
+            <span class="preview-symbol">⌘</span>
+            <span class="preview-label">03 / GAME DESIGN</span>
+          </div>
+          <div class="card-info">
+            <div><h3>Games</h3>
+              <p>Interactive stories, mechanics, and ideas.</p></div>
+            <span class="card-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section gallery-section" id="art-gallery">
+      <p class="eyebrow">SELECTED PROJECTS</p>
+      <h2>Art & Design</h2>
+      <p class="section-description">
+        This is where your drawings, portraits, and digital art can go.
+        We'll add your actual project images here next.
+      </p>
+    </section>
+
+    <section class="section gallery-section" id="photo-gallery">
+      <p class="eyebrow">THROUGH MY LENS</p>
+      <h2>Photography</h2>
+      <p class="section-description">
+        Show your dance photography, portraits, and favorite captured moments.
+      </p>
+    </section>
+
+    <section class="section gallery-section" id="game-gallery">
+      <p class="eyebrow">PLAY · EXPERIMENT · CREATE</p>
+      <h2>Games</h2>
+      <p class="section-description">
+        Share your game projects, character designs, mechanics, and interactive stories.
+      </p>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <p class="eyebrow">HAVE A PROJECT IN MIND?</p>
+      <h2>Let's create something <span class="gradient-text">together.</span></h2>
+      <p class="section-description">
+        Interested in my work? Feel free to reach out.
+      </p>
+      <a class="button primary" href="mailto:YOUR_EMAIL@example.com">
+        Get in touch ↗
+      </a>
+      <p class="muted small-note">Replace the email address with your own before publishing.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#home">B<span>.</span></a>
+    <p>Designed and created by Bryan.</p>
+    <a href="#home" class="back-top">Back to top ↑</a>
+  </footer>
+</body>
+</html>
