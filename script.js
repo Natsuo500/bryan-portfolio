@@ -1,64 +1,64 @@
-
-// ========================================
-// 1. FIND THE HTML ELEMENTS WE NEED
-// ========================================
-
-// Finds the mobile menu button in the HTML.
 const menuToggle = document.querySelector('.menu-toggle');
-
-// Finds the navigation container that holds all the links.
 const navLinks = document.querySelector('.nav-links');
-
-// Finds every navigation link: Home, About, Art, etc.
 const links = document.querySelectorAll('.nav-link');
 
+function closeMenu() {
+  navLinks.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.textContent = '☰';
+}
 
-// ========================================
-// 2. OPEN AND CLOSE THE MOBILE MENU
-// ========================================
-
-// Runs this function whenever the menu button is clicked.
 menuToggle.addEventListener('click', () => {
-
-  // Adds the "open" class if the menu is closed.
-  // Removes the "open" class if the menu is already open.
   const isOpen = navLinks.classList.toggle('open');
-
-  // Updates the accessibility information to say
-  // whether the menu is currently open or closed.
   menuToggle.setAttribute('aria-expanded', String(isOpen));
-
-  // Changes the button symbol:
-  // ☰ means open the menu.
-  // ✕ means close the menu.
   menuToggle.textContent = isOpen ? '✕' : '☰';
 });
 
+links.forEach((link) => link.addEventListener('click', closeMenu));
 
-// ========================================
-// 3. HANDLE NAVIGATION LINK CLICKS
-// ========================================
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+    closeMenu();
+    menuToggle.focus();
+  }
+});
 
-// Goes through every navigation link individually.
-links.forEach((link) => {
-
-  // Adds a click event to each link.
-  link.addEventListener('click', () => {
-
-    // Removes the active highlight from every link.
-    links.forEach((item) => item.classList.remove('active'));
-
-    // Highlights the link that was just clicked.
-    link.classList.add('active');
-
-
-    // Close the mobile menu after a link is clicked.
-    navLinks.classList.remove('open');
-
-    // Update the menu button's accessibility information.
-    menuToggle.setAttribute('aria-expanded', 'false');
-
-    // Reset the menu button to the three-line symbol.
-    menuToggle.textContent = '☰';
+/* Highlight the nav link for the section currently on screen */
+function setActive(id) {
+  links.forEach((link) => {
+    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
   });
+}
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
+}
+
+/* Lightbox: click a gallery image to view it larger */
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+
+document.addEventListener('click', (event) => {
+  const zoom = event.target.closest('.gallery .zoom');
+  if (zoom) {
+    const img = zoom.querySelector('img');
+    const caption = zoom.closest('figure').querySelector('figcaption');
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = caption ? caption.textContent : '';
+    lightbox.showModal();
+    return;
+  }
+
+  // Close on the close button or a click on the dark backdrop
+  if (event.target.closest('.lightbox-close') || event.target === lightbox) {
+    lightbox.close();
+  }
 });

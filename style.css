@@ -1,273 +1,173 @@
-
-/* ========================================
-   1. GLOBAL COLORS AND SETTINGS
-   ======================================== */
-
-/* Variables let us reuse colors throughout the website. */
 :root {
-  --bg: #0b0b12;          /* Main dark background. */
-  --panel: #13131e;       /* Background for cards and panels. */
-  --text: #f4f1ff;        /* Main text color. */
-  --muted: #a5a1b7;       /* Less important text color. */
-  --purple: #a78bfa;      /* Main purple accent. */
-  --pink: #ed9af7;        /* Pink used in gradients. */
-  --border: rgba(255,255,255,.10); /* Subtle borders. */
+  --bg: #0b0b12;
+  --panel: #13131e;
+  --text: #f4f1ff;
+  --muted: #a5a1b7;
+  --purple: #a78bfa;
+  --pink: #ed9af7;
+  --border: rgba(255,255,255,.10);
 }
 
-/* Makes padding and borders count inside an element's width. */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
-/* Smoothly scrolls when a navigation link is clicked.
-   scroll-padding-top prevents headings hiding under the navbar. */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-/* Sets the default appearance for the entire page. */
 body {
-  margin: 0; /* Removes the browser's default outer spacing. */
+  margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
-  line-height: 1.6; /* Adds comfortable space between lines. */
+  line-height: 1.6;
 }
 
-/* Removes underlines from links by default. */
-a {
-  color: inherit;
-  text-decoration: none;
+a { color: inherit; text-decoration: none; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 30;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--purple);
+  color: #100b19;
+  font-weight: 600;
+}
+.skip-link:focus { top: 12px; }
 
-/* ========================================
-   2. NAVIGATION BAR
-   ======================================== */
-
+/* ---------- Navigation ---------- */
 .navbar {
   min-height: 76px;
-  padding: 0 7%; /* Creates space on the left and right. */
-
-  display: flex; /* Places the logo and links in a row. */
-  align-items: center; /* Vertically centers the items. */
-  justify-content: space-between; /* Separates logo and navigation. */
-
-  position: sticky; /* Keeps the navbar visible while scrolling. */
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
   top: 0;
-  z-index: 10; /* Keeps the navbar above most page content. */
-
+  z-index: 10;
   background: rgba(11,11,18,.88);
-  backdrop-filter: blur(18px); /* Blurs content behind the navbar. */
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
 }
 
-/* Styles the B logo. */
 .logo {
   font: 700 2rem 'Space Grotesk', sans-serif;
 }
+.logo span, .hero-symbol span { color: var(--purple); }
 
-/* Colors the dot in the logo purple. */
-.logo span,
-.hero-symbol span {
-  color: var(--purple);
-}
-
-/* Places navigation links next to each other. */
-.nav-links {
-  display: flex;
-  gap: 30px; /* Space between navigation links. */
-}
-
-/* Default appearance of each navigation link. */
+.nav-links { display: flex; gap: 30px; }
 .nav-link {
   color: var(--muted);
   font-size: .92rem;
-
-  /* Smoothly animates color and glow changes. */
-  transition: color .2s, text-shadow .2s;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
 }
-
-/* Highlights a link when hovered over or marked active. */
-.nav-link:hover,
+.nav-link:hover { color: #fff; }
 .nav-link.active {
   color: #fff;
-  text-shadow: 0 0 15px rgba(167,139,250,.9);
+  border-bottom-color: var(--purple);
 }
-
-/* The mobile menu button is hidden on larger screens. */
 .menu-toggle {
   display: none;
   background: none;
   border: 0;
   color: white;
   font-size: 1.7rem;
-  cursor: pointer; /* Shows a pointer when hovered over. */
+  cursor: pointer;
 }
 
-
-/* ========================================
-   3. SHARED SECTION LAYOUT
-   ======================================== */
-
-/* Gives each main section consistent spacing. */
-.section {
-  padding: 100px 10%;
-  scroll-margin-top: 70px;
+/* ---------- Sections ---------- */
+.section { padding: 100px 10%; }
+.hero {
+  min-height: 610px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 45px;
 }
-
-/* Small uppercase labels above section headings. */
 .eyebrow {
   color: var(--purple);
-  letter-spacing: 2px;
-  font-size: .75rem;
-  font-weight: 700;
+  font-size: .9rem;
+  font-weight: 600;
+  margin: 0;
 }
-
-/* Sets the fonts and line spacing for all headings. */
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   font-family: 'Space Grotesk', sans-serif;
   line-height: 1.15;
 }
-
-/* Large main introduction heading.
-   clamp() adjusts the size based on the screen width. */
-h1 {
-  font-size: clamp(2.8rem, 5.2vw, 4.8rem);
-  margin: 22px 0;
-}
-
-/* Main headings used in the other sections. */
-h2 {
-  font-size: clamp(2.1rem, 4vw, 3.1rem);
-  margin: 12px 0 22px;
-}
-
-/* Gives selected words a purple-to-pink gradient. */
+h1 { font-size: clamp(2.8rem, 5.2vw, 4.8rem); margin: 22px 0; }
+h2 { font-size: clamp(2.1rem, 4vw, 3.1rem); margin: 12px 0 22px; }
+h3 { margin: 0 0 8px; }
 .gradient-text {
   background: linear-gradient(100deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-
-/* Styles the descriptive paragraphs. */
-.hero-description,
-.section-description {
+.hero-description, .section-description {
   color: var(--muted);
   max-width: 620px;
   font-size: 1.05rem;
 }
-
-
-/* ========================================
-   4. BUTTONS
-   ======================================== */
-
-/* Places the hero buttons next to each other. */
-.hero-buttons {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap; /* Allows buttons to wrap on narrow screens. */
-  margin-top: 30px;
-}
-
-/* Shared appearance for all buttons. */
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
 .button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
   padding: 13px 21px;
   border-radius: 9px;
   font-weight: 600;
-
-  /* Smoothly animates the button when hovered over. */
-  transition: transform .2s, box-shadow .2s;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
 }
-
-/* Moves a button slightly upward when hovered over. */
-.button:hover {
-  transform: translateY(-3px);
-}
-
-/* Main button with a purple-to-pink gradient. */
+.button:hover { transform: translateY(-3px); }
 .primary {
   color: #100b19;
   background: linear-gradient(100deg, var(--purple), var(--pink));
   box-shadow: 0 8px 30px rgba(167,139,250,.16);
 }
+.primary:hover { box-shadow: 0 8px 35px rgba(167,139,250,.35); }
+.secondary { border: 1px solid var(--border); }
+.secondary:hover { border-color: var(--purple); }
 
-/* Makes the main button glow more when hovered over. */
-.primary:hover {
-  box-shadow: 0 8px 35px rgba(167,139,250,.35);
-}
-
-/* Secondary button has an outline instead of a filled background. */
-.secondary {
-  border: 1px solid var(--border);
-}
-
-/* Changes the outline to purple when hovered over. */
-.secondary:hover {
-  border-color: var(--purple);
-}
-
-
-/* ========================================
-   5. HERO GRAPHIC
-   ======================================== */
-
-/* Creates the decorative graphic beside the introduction. */
 .hero-art {
   min-height: 350px;
   position: relative;
-
   display: grid;
-  place-items: center; /* Centers the logo horizontally and vertically. */
-
-  overflow: hidden; /* Hides decoration that extends beyond the box. */
+  place-items: center;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 28px;
-
-  /* Creates the dark background with a purple glow. */
   background:
     radial-gradient(ellipse at 50% 50%, rgba(124,58,237,.22), transparent 60%),
     linear-gradient(145deg, #171423, #101019);
 }
-
-/* Large B symbol in the center of the graphic. */
+.hero-art > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
 .hero-symbol {
   font: 700 clamp(7rem, 15vw, 12rem) 'Space Grotesk', sans-serif;
-  z-index: 1; /* Places the B above the decorative ovals. */
+  z-index: 1;
   text-shadow: 0 0 70px rgba(167,139,250,.22);
 }
-
-/* Shared styling for the two decorative ovals. */
 .orbit {
   position: absolute;
   border: 1px solid rgba(190,160,255,.24);
   border-radius: 50%;
   transform: rotate(-25deg);
 }
-
-/* First oval: taller than it is wide. */
-.orbit-one {
-  width: 260px;
-  height: 340px;
-}
-
-/* Second oval: wider than it is tall and rotated differently. */
-.orbit-two {
-  width: 330px;
-  height: 210px;
-  transform: rotate(35deg);
-}
-
-/* Shared appearance for the floating labels. */
+.orbit-one { width: 260px; height: 340px; }
+.orbit-two { width: 330px; height: 210px; transform: rotate(35deg); }
 .floating-tag {
   position: absolute;
   background: rgba(25,22,39,.9);
@@ -276,30 +176,10 @@ h2 {
   border-radius: 9px;
   font-size: .78rem;
 }
+.tag-top { top: 15%; right: 5%; }
+.tag-bottom { bottom: 13%; left: 5%; }
 
-/* Positions the first label near the upper-right corner. */
-.tag-top {
-  top: 15%;
-  right: 5%;
-}
-
-/* Positions the second label near the lower-left corner. */
-.tag-bottom {
-  bottom: 13%;
-  left: 5%;
-}
-
-
-/* ========================================
-   6. ABOUT AND PORTFOLIO SECTIONS
-   ======================================== */
-
-/* Adds a subtle line above the About section. */
-.about-section {
-  border-top: 1px solid var(--border);
-}
-
-/* Places the portfolio heading and description side by side. */
+.about-section { border-top: 1px solid var(--border); }
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -307,20 +187,10 @@ h2 {
   gap: 20px;
   margin-bottom: 35px;
 }
+.muted { color: var(--muted); }
 
-/* Styles less prominent descriptive text. */
-.muted {
-  color: var(--muted);
-}
-
-/* Creates three equal columns for the portfolio cards. */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-/* Appearance and hover animation for each card. */
+/* ---------- Work overview cards ---------- */
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .work-card {
   overflow: hidden;
   border: 1px solid var(--border);
@@ -328,14 +198,7 @@ h2 {
   background: var(--panel);
   transition: transform .25s, border-color .25s;
 }
-
-/* Lifts the card and highlights its border when hovered over. */
-.work-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--purple);
-}
-
-/* Shared layout for the colored card previews. */
+.work-card:hover { transform: translateY(-6px); border-color: var(--purple); }
 .card-art {
   min-height: 220px;
   display: flex;
@@ -345,94 +208,137 @@ h2 {
   position: relative;
   overflow: hidden;
 }
-
-/* Art card background. */
-.art-preview {
-  background: radial-gradient(circle, #45305f, #21182e 65%, #16131e);
+.card-art > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
-/* Photography card background. */
-.photo-preview {
-  background: radial-gradient(circle at 60% 30%, #67518b, #28233e 55%, #17151f);
-}
-
-/* Games card background. */
-.game-preview {
-  background: radial-gradient(circle at 40% 60%, #5b3b76, #211b35 60%, #15131e);
-}
-
-/* Large decorative symbols inside the cards. */
-.preview-symbol {
-  font-size: 6rem;
-  color: #e3c9ff;
-  opacity: .9;
-}
-
-/* Small category label positioned at the bottom of each card. */
+.art-preview { background: radial-gradient(circle, #45305f, #21182e 65%, #16131e); }
+.photo-preview { background: radial-gradient(circle at 60% 30%, #67518b, #28233e 55%, #17151f); }
+.game-preview { background: radial-gradient(circle at 40% 60%, #5b3b76, #211b35 60%, #15131e); }
+.preview-symbol { font-size: 6rem; color: #e3c9ff; opacity: .9; }
 .preview-label {
   position: absolute;
   bottom: 15px;
   left: 17px;
-  font-size: .7rem;
-  letter-spacing: 1.5px;
+  font-size: .8rem;
   color: #ddd0f5;
 }
+.card-info { padding: 22px; display: flex; justify-content: space-between; gap: 10px; }
+.card-info p { margin: 0; color: var(--muted); font-size: .9rem; }
+.card-arrow { color: var(--purple); font-size: 1.4rem; }
 
-/* Places each card's title and arrow side by side. */
-.card-info {
-  padding: 22px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+/* ---------- Galleries ---------- */
+.gallery-section { border-top: 1px solid var(--border); }
+.gallery-section .section-description { max-width: 650px; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 35px;
 }
+.gallery figure { margin: 0; }
+.gallery .zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel);
+  cursor: zoom-in;
+  transition: border-color .2s;
+}
+.gallery .zoom:hover { border-color: var(--purple); }
+.gallery img { width: 100%; height: auto; display: block; }
+.gallery figcaption { color: var(--muted); font-size: .85rem; margin-top: 8px; }
 
-/* Removes extra spacing and softens the card description. */
-.card-info p {
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+  margin-top: 35px;
+}
+.project {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--panel);
+}
+.project p { margin: 0 0 12px; color: var(--muted); }
+.project .project-meta { font-size: .85rem; }
+.project-link { color: var(--purple); font-weight: 600; }
+.project-link:hover { text-decoration: underline; }
+
+.empty-state {
+  grid-column: 1 / -1;
   margin: 0;
+  padding: 40px 24px;
+  text-align: center;
   color: var(--muted);
-  font-size: .9rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+/* Hide the "coming soon" message once real items are added */
+.gallery:has(figure) .empty-state,
+.projects:has(.project) .empty-state { display: none; }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  max-width: min(94vw, 1200px);
+  max-height: 94vh;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  overflow: hidden;
+}
+.lightbox::backdrop { background: rgba(5,5,10,.85); }
+.lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.lightbox-caption { margin: 0; padding: 14px 20px; color: var(--muted); font-size: .9rem; }
+.lightbox-caption:empty { display: none; }
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(11,11,18,.8);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-/* Colors the arrow purple. */
-.card-arrow {
-  color: var(--purple);
-  font-size: 1.4rem;
-}
-
-/* Adds a line above each project gallery section. */
-.gallery-section {
-  border-top: 1px solid var(--border);
-}
-
-/* Limits the width of gallery descriptions for readability. */
-.gallery-section .section-description {
-  max-width: 650px;
-}
-
-
-/* ========================================
-   7. CONTACT SECTION AND FOOTER
-   ======================================== */
-
-/* Centers the contact content and adds a subtle purple glow. */
+/* ---------- Contact and footer ---------- */
 .contact-section {
   text-align: center;
   border-top: 1px solid var(--border);
   background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,.13), transparent 60%);
 }
-
-/* Centers the contact paragraph and adds space below it. */
-.contact-section .section-description {
-  margin: 0 auto 28px;
+.contact-section .section-description { margin: 0 auto 28px; }
+.social-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  padding: 0;
+  margin: 28px 0 0;
+  color: var(--muted);
 }
+.social-links a:hover { color: var(--purple); }
 
-/* Makes the email reminder text smaller. */
-.small-note {
-  font-size: .8rem;
-  margin-top: 20px;
-}
-
-/* Footer layout at the bottom of the page. */
 footer {
   border-top: 1px solid var(--border);
   padding: 28px 7%;
@@ -441,74 +347,22 @@ footer {
   align-items: center;
   gap: 20px;
 }
+footer p { color: var(--muted); font-size: .85rem; }
+.back-top { color: var(--muted); font-size: .9rem; }
+.back-top:hover { color: var(--purple); }
 
-/* Footer text is less prominent than the main content. */
-footer p {
-  color: var(--muted);
-  font-size: .85rem;
-}
-
-/* Back-to-top link styling. */
-.back-top {
-  color: var(--muted);
-  font-size: .9rem;
-}
-
-/* Highlights the back-to-top link when hovered over. */
-.back-top:hover {
-  color: var(--purple);
-}
-
-
-/* ========================================
-   8. RESPONSIVE DESIGN: TABLETS
-   ======================================== */
-
-/* These rules apply when the screen is 850px wide or smaller. */
+/* ---------- Responsive ---------- */
 @media (max-width: 850px) {
-  .navbar {
-    padding: 0 5%;
-  }
-
-  /* Reduces the gaps between navigation links. */
-  .nav-links {
-    gap: 15px;
-  }
-
-  /* Reduces section spacing on smaller screens. */
-  .section {
-    padding: 75px 6%;
-  }
-
-  /* Stacks the introduction and graphic vertically. */
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-art {
-    min-height: 300px;
-  }
-
-  /* Changes the cards from three columns to two. */
-  .work-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .navbar { padding: 0 5%; }
+  .nav-links { gap: 15px; }
+  .section { padding: 75px 6%; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-art { min-height: 300px; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
 }
 
-
-/* ========================================
-   9. RESPONSIVE DESIGN: PHONES
-   ======================================== */
-
-/* These rules apply when the screen is 600px wide or smaller. */
 @media (max-width: 600px) {
-
-  /* Shows the mobile menu button on phones. */
-  .menu-toggle {
-    display: block;
-  }
-
-  /* Mobile navigation is hidden until the menu is opened. */
+  .menu-toggle { display: block; }
   .nav-links {
     display: none;
     position: absolute;
@@ -518,35 +372,19 @@ footer p {
     padding: 22px 6%;
     background: #11101a;
     border-bottom: 1px solid var(--border);
-
-    /* Displays the links vertically when the menu opens. */
     flex-direction: column;
     gap: 18px;
   }
+  .nav-links.open { display: flex; }
+  .nav-link { align-self: flex-start; }
+  .hero { padding-top: 65px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .section-heading { align-items: start; flex-direction: column; }
+  footer { flex-wrap: wrap; }
+}
 
-  /* JavaScript adds this class when the menu button is clicked. */
-  .nav-links.open {
-    display: flex;
-  }
-
-  /* Reduces the top spacing of the home section. */
-  .hero {
-    padding-top: 65px;
-  }
-
-  /* Stacks portfolio cards into one column on phones. */
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Stacks the work heading and description vertically. */
-  .section-heading {
-    align-items: start;
-    flex-direction: column;
-  }
-
-  /* Allows footer items to wrap onto multiple lines. */
-  footer {
-    flex-wrap: wrap;
-  }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+  .button:hover, .work-card:hover { transform: none; }
 }
