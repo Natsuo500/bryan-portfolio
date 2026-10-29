@@ -1,36 +1,71 @@
 <!DOCTYPE html>
+<!-- This line tells the browser this is a modern HTML5 page. -->
 <html lang="en">
+<!-- lang="en" says the page is in English (helps screen readers and search engines). -->
 <head>
+  <!-- The <head> holds information ABOUT the page. Visitors don't see it on the page itself. -->
+
+  <!-- Makes special characters (like ✦ and ↗) display correctly. -->
   <meta charset="UTF-8">
+
+  <!-- Makes the site fit phone screens instead of showing a tiny zoomed-out desktop page. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- The title shows on the browser tab and is the big blue link in Google results. -->
   <title>Bryan | Artist, Photographer &amp; Game Designer</title>
+
+  <!-- The description is the small grey summary text under your title in Google results. -->
   <meta name="description" content="Bryan's portfolio of art and design, photography, and game projects.">
+
+  <!-- Colors the browser bar on phones to match your dark background. -->
   <meta name="theme-color" content="#0b0b12">
 
-  <!-- Link preview when the site is shared. To show an image in the preview,
-       add: <meta property="og:image" content="https://natsuo500.github.io/bryan-portfolio/images/preview.jpg"> -->
+  <!-- The "og:" tags control how your link looks when shared in Discord, iMessage, Instagram, etc.
+       To show an image in the preview, add:
+       <meta property="og:image" content="https://natsuo500.github.io/bryan-portfolio/images/preview.jpg"> -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Bryan | Artist, Photographer &amp; Game Designer">
   <meta property="og:description" content="Bryan's portfolio of art and design, photography, and game projects.">
   <meta property="og:url" content="https://natsuo500.github.io/bryan-portfolio/">
 
+  <!-- The small icon on the browser tab. This one is a purple "B" drawn directly in the code,
+       so you don't need a separate image file. -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b12'/%3E%3Ctext x='32' y='46' font-size='40' font-weight='700' text-anchor='middle' fill='%23a78bfa' font-family='sans-serif'%3EB%3C/text%3E%3C/svg%3E">
 
+  <!-- These three lines load your fonts (DM Sans for body text, Space Grotesk for headings)
+       from Google. "preconnect" starts the connection early so the fonts show up faster. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Connects your design file (style.css) to this page. -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Connects your behavior file (script.js). "defer" means: wait until the page has
+       loaded before running it, so the code can find everything it needs. -->
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- The <body> holds everything visitors actually see. -->
+
+  <!-- Invisible link that appears only when someone presses Tab on their keyboard.
+       It lets keyboard and screen-reader users skip the menu and jump straight to the content. -->
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ========== TOP BAR (stays at the top while you scroll) ========== -->
   <header class="navbar">
+    <!-- The "B." logo. Clicking it scrolls back to the top (#home). The purple dot is a <span>
+         so the CSS can color it separately. aria-label gives screen readers a clear name. -->
     <a class="logo" href="#home" aria-label="Bryan, back to top">B<span>.</span></a>
 
+    <!-- The ☰ "hamburger" button. It's hidden on big screens and appears on phones.
+         script.js opens and closes the menu when it's clicked.
+         aria-expanded tells screen readers whether the menu is open (true) or closed (false). -->
     <button class="menu-toggle" aria-label="Toggle navigation"
       aria-expanded="false" aria-controls="main-nav">☰</button>
 
+    <!-- The menu links. Each href="#something" scrolls to the section with that id further down.
+         "active" marks the current page section; script.js moves it as you scroll. -->
     <nav class="nav-links" id="main-nav" aria-label="Main navigation">
       <a class="nav-link active" href="#home">Home</a>
       <a class="nav-link" href="#about">About</a>
@@ -41,25 +76,40 @@
     </nav>
   </header>
 
+  <!-- <main> wraps the main content of the page (everything except the top bar and footer). -->
   <main id="main">
+
+    <!-- ========== HERO: the first thing visitors see ========== -->
     <section class="hero section" id="home">
       <div class="hero-copy">
+        <!-- Small line above the headline that says what you do. -->
         <p class="eyebrow">Artist, photographer, game designer</p>
+
+        <!-- The main headline. It's the most important text on the page (h1 = only one per page).
+             <br> forces a line break. The gradient-text span makes "creative world." purple-to-pink. -->
         <h1>Hey, I'm Bryan.<br>
           Welcome to my <span class="gradient-text">creative world.</span>
         </h1>
+
+        <!-- One or two sentences telling visitors what to expect. Replace with your own words
+             to make it more personal. -->
         <p class="hero-description">
           I create art, capture moments, and build interactive experiences.
           Take a look around and see what I've been working on.
         </p>
+
+        <!-- Two buttons. The first (filled) is the main action: it scrolls to your work.
+             The second (outlined) is the secondary action: it scrolls to the About section. -->
         <div class="hero-buttons">
           <a class="button primary" href="#work">See my work</a>
           <a class="button secondary" href="#about">About me</a>
         </div>
       </div>
 
-      <!-- Tip: to feature a real piece here, replace everything inside
-           .hero-art with: <img src="images/hero.webp" alt="Describe the image"> -->
+      <!-- The decorative box on the right: a big "B.", two orbit rings, and two floating labels.
+           aria-hidden="true" tells screen readers to skip it because it's only decoration.
+           Tip: to show a real piece of your work here instead, replace everything inside
+           this div with: <img src="images/hero.webp" alt="Describe the image"> -->
       <div class="hero-art" aria-hidden="true">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
@@ -69,7 +119,11 @@
       </div>
     </section>
 
+    <!-- ========== ABOUT: a short introduction to who you are ========== -->
     <section class="section about-section" id="about">
+      <!-- Small label, then the section heading (h2), then the paragraph.
+           Tip: replace this paragraph with something specific about you: your story,
+           what you're working toward, and what makes your style yours. -->
       <p class="eyebrow">About</p>
       <h2>A little about me</h2>
       <p class="section-description">
@@ -80,21 +134,27 @@
       </p>
     </section>
 
+    <!-- ========== WORK OVERVIEW: three cards that link to your galleries ========== -->
     <section class="section work-section" id="work">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Work</p>
           <h2>Explore my work</h2>
         </div>
+        <!-- Short side note on the right of the heading. -->
         <p class="muted">A collection of things I've made and learned.</p>
       </div>
 
+      <!-- Each card is one big clickable link. It scrolls to the matching gallery below.
+           The symbols (✳ ◎ ⌘) are placeholders; you can replace each one with a real image,
+           e.g. <img src="images/art-cover.webp" alt="">, placed inside the "card-art" div. -->
       <div class="work-grid">
         <a class="work-card" href="#art-gallery">
           <div class="card-art art-preview">
             <span class="preview-symbol" aria-hidden="true">✳</span>
             <span class="preview-label">Visual art</span>
           </div>
+          <!-- The title and one-line description under the picture area. -->
           <div class="card-info">
             <div><h3>Art &amp; Design</h3>
               <p>Illustration, portraits, and digital work.</p></div>
@@ -136,6 +196,16 @@
             Use your image's real width and height so the page doesn't jump.
          3. Once a gallery has a <figure>, its "coming soon" message hides itself.
 
+         What each part of the template does:
+         <figure>      = wraps one piece of work together with its caption
+         <button class="zoom"> = makes the image clickable (opens the large viewer)
+         <img ...>     = the image itself
+           src         = where the image file is
+           alt         = describes the image for screen readers and if it fails to load
+           width/height= the image's real size, so the page doesn't jump while loading
+           loading="lazy" = only loads the image when the visitor scrolls near it (faster page)
+         <figcaption>  = the text caption under the image
+
          <figure>
            <button type="button" class="zoom" aria-label="View larger: Piece title">
              <img src="images/art/piece-01.webp" alt="Describe what's in the image"
@@ -145,16 +215,20 @@
          </figure>
          ============================================================ -->
 
+    <!-- ========== ART GALLERY ========== -->
     <section class="section gallery-section" id="art-gallery">
       <p class="eyebrow">Selected projects</p>
       <h2>Art &amp; Design</h2>
       <p class="section-description">Illustration, portraits, and digital work.</p>
+      <!-- The grid that holds your art. The "coming soon" message shows only while
+           the grid is empty, and disappears automatically after you add a <figure>. -->
       <div class="gallery">
         <p class="empty-state">New pieces are being added. Check back soon.</p>
         <!-- Paste art <figure> items here -->
       </div>
     </section>
 
+    <!-- ========== PHOTOGRAPHY GALLERY ========== -->
     <section class="section gallery-section" id="photo-gallery">
       <p class="eyebrow">Through my lens</p>
       <h2>Photography</h2>
@@ -165,13 +239,16 @@
       </div>
     </section>
 
+    <!-- ========== GAMES ========== -->
     <section class="section gallery-section" id="game-gallery">
       <p class="eyebrow">Play and experiment</p>
       <h2>Games</h2>
       <p class="section-description">Interactive stories, mechanics, and ideas.</p>
+      <!-- Games use text cards instead of images, because a game needs a bit of explanation:
+           what your role was, what tools you used, and where to play it. -->
       <div class="projects">
         <p class="empty-state">Game projects are being added. Check back soon.</p>
-        <!-- Copy this template for each game:
+        <!-- Copy this template for each game (remove the comment markers around it to activate it):
         <article class="project">
           <h3>Game title</h3>
           <p class="project-meta">Role: designer and developer · Tools: Unity · 2026</p>
@@ -182,15 +259,17 @@
       </div>
     </section>
 
+    <!-- ========== CONTACT ========== -->
     <section class="section contact-section" id="contact">
       <p class="eyebrow">Contact</p>
       <h2>Let's create something together</h2>
       <p class="section-description">
         Interested in my work? Feel free to reach out.
       </p>
-      <!-- TODO: replace YOUR_EMAIL@example.com with your real email address -->
+      <!-- TODO: replace YOUR_EMAIL@example.com with your real email address.
+           "mailto:" makes the button open the visitor's email app with your address filled in. -->
       <a class="button primary" href="mailto:YOUR_EMAIL@example.com">Email me</a>
-      <!-- Optional: add links to Instagram, ArtStation, itch.io, etc.
+      <!-- Optional: add links to Instagram, ArtStation, itch.io, etc. (remove the comment markers around it to activate)
       <ul class="social-links">
         <li><a href="https://instagram.com/yourname">Instagram</a></li>
       </ul>
@@ -198,12 +277,17 @@
     </section>
   </main>
 
+  <!-- ========== FOOTER: the strip at the very bottom ========== -->
   <footer>
     <a class="logo" href="#home" aria-label="Bryan, back to top">B<span>.</span></a>
     <p>Designed and created by Bryan.</p>
+    <!-- Scrolls back to the top of the page. -->
     <a href="#home" class="back-top">Back to top ↑</a>
   </footer>
 
+  <!-- The enlarged-image viewer. It stays hidden until a visitor clicks a gallery image.
+       script.js fills in the image and caption, then opens it. <dialog> is a built-in browser
+       feature that handles the dark background, the Escape key, and keyboard focus for us. -->
   <dialog class="lightbox" aria-label="Enlarged image">
     <button type="button" class="lightbox-close" aria-label="Close">✕</button>
     <img src="" alt="">

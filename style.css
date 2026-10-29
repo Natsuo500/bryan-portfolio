@@ -1,26 +1,47 @@
+/* ==========================================================
+   style.css controls how your site LOOKS: colors, fonts,
+   spacing, and layout.
+
+   Basic reading guide:
+   - A rule looks like:  .name { property: value; }
+   - ".name" picks which element(s) to style (a dot means a class from the HTML)
+   - Everything between { } says how to style them
+   ========================================================== */
+
+/* ---------- Color palette ----------
+   These are "variables." Change a color here once and it updates everywhere.
+   Use them elsewhere by writing var(--name). */
 :root {
-  --bg: #0b0b12;
-  --panel: #13131e;
-  --text: #f4f1ff;
-  --muted: #a5a1b7;
-  --purple: #a78bfa;
-  --pink: #ed9af7;
-  --border: rgba(255,255,255,.10);
+  --bg: #0b0b12;               /* page background (near black) */
+  --panel: #13131e;            /* cards and boxes, slightly lighter than the background */
+  --text: #f4f1ff;             /* main text color (soft white) */
+  --muted: #a5a1b7;            /* secondary, greyer text */
+  --purple: #a78bfa;           /* main accent color */
+  --pink: #ed9af7;             /* second accent, used in gradients */
+  --border: rgba(255,255,255,.10); /* faint white lines (10% opaque) */
 }
 
+/* Makes width/height include padding and borders, which makes sizing predictable. */
 * { box-sizing: border-box; }
+
+/* smooth = clicking a menu link glides to the section instead of jumping.
+   scroll-padding-top leaves 90px of room so the sticky top bar doesn't cover the heading. */
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
+/* Base settings for the whole page. */
 body {
-  margin: 0;
+  margin: 0;                              /* remove the browser's default outer gap */
   background: var(--bg);
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  line-height: 1.6;
+  font-family: 'DM Sans', sans-serif;     /* body font (sans-serif is the backup if it fails to load) */
+  line-height: 1.6;                       /* space between lines of text, so it's easy to read */
 }
 
+/* Links keep the surrounding text color and have no underline by default. */
 a { color: inherit; text-decoration: none; }
 
+/* Purple outline that appears when someone navigates with the keyboard (Tab key).
+   It shows where they are on the page. Mouse clicks don't trigger it. */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--purple);
@@ -28,52 +49,59 @@ button:focus-visible {
   border-radius: 4px;
 }
 
+/* "Skip to content" link: parked off-screen above the page, and slides into view
+   only when a keyboard user tabs to it. */
 .skip-link {
   position: absolute;
   left: 16px;
-  top: -60px;
-  z-index: 30;
+  top: -60px;              /* hidden above the top of the screen */
+  z-index: 30;             /* sits on top of everything else */
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--purple);
   color: #100b19;
   font-weight: 600;
 }
-.skip-link:focus { top: 12px; }
+.skip-link:focus { top: 12px; }   /* moves into view when focused */
 
-/* ---------- Navigation ---------- */
+/* ---------- Navigation bar (top of the page) ---------- */
 .navbar {
   min-height: 76px;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
+  padding: 0 7%;                         /* left/right breathing room */
+  display: flex;                         /* puts logo and menu side by side */
+  align-items: center;                   /* vertically centers them */
+  justify-content: space-between;        /* logo on the left, menu on the right */
+  position: sticky;                      /* stays at the top while scrolling */
   top: 0;
-  z-index: 10;
-  background: rgba(11,11,18,.88);
-  backdrop-filter: blur(18px);
+  z-index: 10;                           /* stays above the content that scrolls beneath it */
+  background: rgba(11,11,18,.88);        /* slightly see-through dark background */
+  backdrop-filter: blur(18px);           /* blurs whatever is behind the bar (frosted glass) */
   border-bottom: 1px solid var(--border);
 }
 
+/* The "B." logo text. The shorthand sets: weight, size, font family. */
 .logo {
   font: 700 2rem 'Space Grotesk', sans-serif;
 }
+/* Makes the dot in the logo (and in the big hero "B.") purple. */
 .logo span, .hero-symbol span { color: var(--purple); }
 
+/* The row of menu links; gap is the space between them. */
 .nav-links { display: flex; gap: 30px; }
 .nav-link {
   color: var(--muted);
   font-size: .92rem;
   padding: 4px 0;
-  border-bottom: 2px solid transparent;
-  transition: color .2s, border-color .2s;
+  border-bottom: 2px solid transparent;   /* invisible line, so the layout doesn't shift when it turns purple */
+  transition: color .2s, border-color .2s;/* animate changes over 0.2 seconds */
 }
-.nav-link:hover { color: #fff; }
-.nav-link.active {
+.nav-link:hover { color: #fff; }          /* brightens when the mouse is over it */
+.nav-link.active {                        /* the link for the section you're currently viewing */
   color: #fff;
   border-bottom-color: var(--purple);
 }
+
+/* The ☰ button. Hidden on large screens; shown on phones (see the media query at the bottom). */
 .menu-toggle {
   display: none;
   background: none;
@@ -83,8 +111,13 @@ button:focus-visible {
   cursor: pointer;
 }
 
-/* ---------- Sections ---------- */
+/* ---------- General section layout ---------- */
+
+/* Every section gets the same generous padding: 100px top/bottom, 10% on the sides. */
 .section { padding: 100px 10%; }
+
+/* Hero = the big opening section. Grid splits it into two columns:
+   text (1.2 parts wide) and artwork (0.8 parts wide). */
 .hero {
   min-height: 610px;
   display: grid;
@@ -92,74 +125,96 @@ button:focus-visible {
   align-items: center;
   gap: 45px;
 }
+
+/* The small purple label above each heading. */
 .eyebrow {
   color: var(--purple);
   font-size: .9rem;
   font-weight: 600;
   margin: 0;
 }
+
+/* All headings use the Space Grotesk font. */
 h1, h2, h3 {
   font-family: 'Space Grotesk', sans-serif;
-  line-height: 1.15;
+  line-height: 1.15;    /* tighter line spacing suits large text */
 }
+/* clamp(min, ideal, max) = size grows with the screen but never goes below or above the limits. */
 h1 { font-size: clamp(2.8rem, 5.2vw, 4.8rem); margin: 22px 0; }
 h2 { font-size: clamp(2.1rem, 4vw, 3.1rem); margin: 12px 0 22px; }
 h3 { margin: 0 0 8px; }
+
+/* Gradient-colored text: paints a purple-to-pink gradient behind the text,
+   clips it to the letter shapes, then makes the text itself see-through. */
 .gradient-text {
   background: linear-gradient(100deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+
+/* Paragraphs under headings: grey, and limited to 620px wide so lines aren't too long to read. */
 .hero-description, .section-description {
   color: var(--muted);
   max-width: 620px;
   font-size: 1.05rem;
 }
+
+/* Row of hero buttons. flex-wrap lets them stack on narrow screens. */
 .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+
+/* Shared button style. */
 .button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 13px 21px;
-  border-radius: 9px;
+  border-radius: 9px;      /* rounded corners */
   font-weight: 600;
   transition: transform .2s, box-shadow .2s, border-color .2s;
 }
-.button:hover { transform: translateY(-3px); }
+.button:hover { transform: translateY(-3px); }   /* lifts up 3px on hover */
+
+/* Filled button: gradient background with dark text and a soft glow. */
 .primary {
   color: #100b19;
   background: linear-gradient(100deg, var(--purple), var(--pink));
   box-shadow: 0 8px 30px rgba(167,139,250,.16);
 }
-.primary:hover { box-shadow: 0 8px 35px rgba(167,139,250,.35); }
+.primary:hover { box-shadow: 0 8px 35px rgba(167,139,250,.35); }   /* glow gets stronger on hover */
+
+/* Outlined button. */
 .secondary { border: 1px solid var(--border); }
 .secondary:hover { border-color: var(--purple); }
 
+/* ---------- Hero artwork box (right side of the hero) ---------- */
 .hero-art {
   min-height: 350px;
-  position: relative;
+  position: relative;      /* lets the orbits and tags position themselves inside this box */
   display: grid;
-  place-items: center;
-  overflow: hidden;
+  place-items: center;     /* centers the big "B." */
+  overflow: hidden;        /* hides anything sticking out of the rounded corners */
   border: 1px solid var(--border);
   border-radius: 28px;
-  background:
+  background:              /* two layered backgrounds: a purple glow on top of a dark diagonal gradient */
     radial-gradient(ellipse at 50% 50%, rgba(124,58,237,.22), transparent 60%),
     linear-gradient(145deg, #171423, #101019);
 }
+/* If you add a real image to the hero box, this makes it fill the whole box without stretching. */
 .hero-art > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: absolute;
-  inset: 0;
+  inset: 0;                /* shorthand for top, right, bottom, left all = 0 */
 }
+/* The giant "B." */
 .hero-symbol {
   font: 700 clamp(7rem, 15vw, 12rem) 'Space Grotesk', sans-serif;
-  z-index: 1;
-  text-shadow: 0 0 70px rgba(167,139,250,.22);
+  z-index: 1;                                      /* sits above the orbit rings */
+  text-shadow: 0 0 70px rgba(167,139,250,.22);     /* soft purple glow */
 }
+/* The two tilted ring outlines. border-radius: 50% turns a rectangle into an oval. */
 .orbit {
   position: absolute;
   border: 1px solid rgba(190,160,255,.24);
@@ -168,6 +223,8 @@ h3 { margin: 0 0 8px; }
 }
 .orbit-one { width: 260px; height: 340px; }
 .orbit-two { width: 330px; height: 210px; transform: rotate(35deg); }
+
+/* The two small floating labels in the hero box. */
 .floating-tag {
   position: absolute;
   background: rgba(25,22,39,.9);
@@ -179,7 +236,10 @@ h3 { margin: 0 0 8px; }
 .tag-top { top: 15%; right: 5%; }
 .tag-bottom { bottom: 13%; left: 5%; }
 
-.about-section { border-top: 1px solid var(--border); }
+/* ---------- About and section headings ---------- */
+.about-section { border-top: 1px solid var(--border); }   /* thin divider line above the section */
+
+/* Layout of the "Explore my work" heading row: heading on the left, side note on the right. */
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -190,7 +250,10 @@ h3 { margin: 0 0 8px; }
 .muted { color: var(--muted); }
 
 /* ---------- Work overview cards ---------- */
+
+/* Three equal columns. repeat(3, 1fr) means "3 columns, each 1 share of the width." */
 .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
 .work-card {
   overflow: hidden;
   border: 1px solid var(--border);
@@ -198,7 +261,9 @@ h3 { margin: 0 0 8px; }
   background: var(--panel);
   transition: transform .25s, border-color .25s;
 }
-.work-card:hover { transform: translateY(-6px); border-color: var(--purple); }
+.work-card:hover { transform: translateY(-6px); border-color: var(--purple); }   /* lifts and gets a purple border */
+
+/* The picture area at the top of each card; its contents are centered. */
 .card-art {
   min-height: 220px;
   display: flex;
@@ -208,6 +273,7 @@ h3 { margin: 0 0 8px; }
   position: relative;
   overflow: hidden;
 }
+/* If you place a real <img> in a card, it fills the picture area. */
 .card-art > img {
   position: absolute;
   inset: 0;
@@ -215,11 +281,13 @@ h3 { margin: 0 0 8px; }
   height: 100%;
   object-fit: cover;
 }
+/* Each card has its own purple-toned radial gradient as a placeholder background. */
 .art-preview { background: radial-gradient(circle, #45305f, #21182e 65%, #16131e); }
 .photo-preview { background: radial-gradient(circle at 60% 30%, #67518b, #28233e 55%, #17151f); }
 .game-preview { background: radial-gradient(circle at 40% 60%, #5b3b76, #211b35 60%, #15131e); }
-.preview-symbol { font-size: 6rem; color: #e3c9ff; opacity: .9; }
-.preview-label {
+
+.preview-symbol { font-size: 6rem; color: #e3c9ff; opacity: .9; }   /* the big ✳ ◎ ⌘ icons */
+.preview-label {                                                     /* small label in the bottom-left corner */
   position: absolute;
   bottom: 15px;
   left: 17px;
@@ -234,13 +302,17 @@ h3 { margin: 0 0 8px; }
 .gallery-section { border-top: 1px solid var(--border); }
 .gallery-section .section-description { max-width: 650px; }
 
+/* Responsive image grid: fit as many columns as possible, each at least 260px wide.
+   On a phone you get 1 column; on a laptop, 3 or 4. No extra code needed. */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 18px;
   margin-top: 35px;
 }
-.gallery figure { margin: 0; }
+.gallery figure { margin: 0; }          /* removes the browser's default indent around <figure> */
+
+/* The clickable frame around each gallery image. */
 .gallery .zoom {
   display: block;
   width: 100%;
@@ -249,13 +321,14 @@ h3 { margin: 0 0 8px; }
   border-radius: 12px;
   overflow: hidden;
   background: var(--panel);
-  cursor: zoom-in;
+  cursor: zoom-in;                       /* the mouse turns into a magnifier */
   transition: border-color .2s;
 }
 .gallery .zoom:hover { border-color: var(--purple); }
-.gallery img { width: 100%; height: auto; display: block; }
+.gallery img { width: 100%; height: auto; display: block; }   /* images scale to fit, keeping their proportions */
 .gallery figcaption { color: var(--muted); font-size: .85rem; margin-top: 8px; }
 
+/* Grid for game project cards: each at least 300px wide. */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -273,6 +346,7 @@ h3 { margin: 0 0 8px; }
 .project-link { color: var(--purple); font-weight: 600; }
 .project-link:hover { text-decoration: underline; }
 
+/* The dashed "coming soon" box. grid-column: 1 / -1 makes it span the full width of the grid. */
 .empty-state {
   grid-column: 1 / -1;
   margin: 0;
@@ -282,14 +356,15 @@ h3 { margin: 0 0 8px; }
   border: 1px dashed var(--border);
   border-radius: 12px;
 }
-/* Hide the "coming soon" message once real items are added */
+/* Hide the "coming soon" message once real items are added.
+   :has() means "if this container contains a <figure> (or a .project)...". */
 .gallery:has(figure) .empty-state,
 .projects:has(.project) .empty-state { display: none; }
 
-/* ---------- Lightbox ---------- */
+/* ---------- Lightbox (enlarged image viewer) ---------- */
 .lightbox {
-  max-width: min(94vw, 1200px);
-  max-height: 94vh;
+  max-width: min(94vw, 1200px);    /* up to 94% of the screen width, never more than 1200px */
+  max-height: 94vh;                /* vh = percent of screen height */
   padding: 0;
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -297,17 +372,17 @@ h3 { margin: 0 0 8px; }
   color: var(--text);
   overflow: hidden;
 }
-.lightbox::backdrop { background: rgba(5,5,10,.85); }
+.lightbox::backdrop { background: rgba(5,5,10,.85); }   /* the dark layer behind the open viewer */
 .lightbox img {
   display: block;
   max-width: 100%;
-  max-height: 82vh;
+  max-height: 82vh;          /* leaves room for the caption */
   margin: 0 auto;
-  object-fit: contain;
+  object-fit: contain;       /* shows the whole image without cropping */
 }
 .lightbox-caption { margin: 0; padding: 14px 20px; color: var(--muted); font-size: .9rem; }
-.lightbox-caption:empty { display: none; }
-.lightbox-close {
+.lightbox-caption:empty { display: none; }   /* no caption = no empty padded strip */
+.lightbox-close {                            /* round ✕ button in the top-right corner */
   position: absolute;
   top: 10px;
   right: 10px;
@@ -321,13 +396,16 @@ h3 { margin: 0 0 8px; }
   cursor: pointer;
 }
 
-/* ---------- Contact and footer ---------- */
+/* ---------- Contact section and footer ---------- */
 .contact-section {
   text-align: center;
   border-top: 1px solid var(--border);
-  background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,.13), transparent 60%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,.13), transparent 60%);  /* faint glow at the bottom */
 }
+/* margin: 0 auto centers the paragraph block; 28px below separates it from the button. */
 .contact-section .section-description { margin: 0 auto 28px; }
+
+/* Optional row of social links (only appears if you uncomment them in the HTML). */
 .social-links {
   list-style: none;
   display: flex;
@@ -351,20 +429,25 @@ footer p { color: var(--muted); font-size: .85rem; }
 .back-top { color: var(--muted); font-size: .9rem; }
 .back-top:hover { color: var(--purple); }
 
-/* ---------- Responsive ---------- */
+/* ---------- Responsive rules ----------
+   "@media (max-width: X)" means: only apply these rules on screens X pixels wide or narrower.
+   This is how the site adapts to tablets and phones. */
+
+/* Tablets and small laptops (850px and narrower) */
 @media (max-width: 850px) {
   .navbar { padding: 0 5%; }
   .nav-links { gap: 15px; }
   .section { padding: 75px 6%; }
-  .hero { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; }        /* hero stacks into a single column */
   .hero-art { min-height: 300px; }
-  .work-grid { grid-template-columns: 1fr 1fr; }
+  .work-grid { grid-template-columns: 1fr 1fr; }   /* cards go from 3 columns to 2 */
 }
 
+/* Phones (600px and narrower) */
 @media (max-width: 600px) {
-  .menu-toggle { display: block; }
-  .nav-links {
-    display: none;
+  .menu-toggle { display: block; }             /* show the ☰ button */
+  .nav-links {                                 /* menu becomes a dropdown panel under the top bar */
+    display: none;                             /* hidden until opened */
     position: absolute;
     top: 76px;
     left: 0;
@@ -372,17 +455,19 @@ footer p { color: var(--muted); font-size: .85rem; }
     padding: 22px 6%;
     background: #11101a;
     border-bottom: 1px solid var(--border);
-    flex-direction: column;
+    flex-direction: column;                    /* links stack vertically */
     gap: 18px;
   }
-  .nav-links.open { display: flex; }
-  .nav-link { align-self: flex-start; }
+  .nav-links.open { display: flex; }           /* script.js adds the "open" class to show the menu */
+  .nav-link { align-self: flex-start; }        /* underline hugs the text instead of stretching across */
   .hero { padding-top: 65px; }
-  .work-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }   /* cards stack into 1 column */
   .section-heading { align-items: start; flex-direction: column; }
   footer { flex-wrap: wrap; }
 }
 
+/* For visitors who turned on "reduce motion" in their device settings (helps people
+   who get dizzy from animations): switch off animations and the hover lift effects. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
