@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Tells the browser this page uses standard HTML5. -->
   <meta charset="UTF-8">
+
+  <!-- Makes the website resize correctly on phones and computers. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- A short description of the website for search engines. -->
   <meta name="description" content="Bryan's creative portfolio featuring art, photography, and games.">
+
+  <!-- The title displayed in the browser tab. -->
   <title>Bryan | Creative Portfolio</title>
+
+  <!-- Connects this HTML file to the CSS design file. -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Loads JavaScript after the HTML is ready to use. -->
   <script src="script.js" defer></script>
 </head>
+
 <body>
+  <!-- HEADER: Contains the logo and navigation links. -->
   <header class="navbar">
+
+    <!-- Clicking the logo takes visitors back to the home section. -->
     <a class="logo" href="#home">B<span>.</span></a>
 
+    <!-- This button opens and closes the navigation on small screens. -->
     <button class="menu-toggle" aria-label="Toggle navigation"
       aria-expanded="false">☰</button>
 
+    <!-- Navigation links jump to sections with matching IDs. -->
     <nav class="nav-links" aria-label="Main navigation">
       <a class="nav-link active" href="#home">Home</a>
       <a class="nav-link" href="#about">About</a>
@@ -25,35 +42,53 @@
     </nav>
   </header>
 
+  <!-- MAIN: Holds the main content of the portfolio. -->
   <main>
+
+    <!-- HOME SECTION: The first section visitors see. -->
     <section class="hero section" id="home">
       <div class="hero-copy">
+        <!-- Small text above the main heading. -->
         <p class="eyebrow">ARTIST · PHOTOGRAPHER · GAME DESIGNER</p>
+
+        <!-- Main introduction heading. The span gets the gradient color. -->
         <h1>Hey, I'm Bryan.<br>
           Welcome to my <span class="gradient-text">creative world.</span>
         </h1>
+
+        <!-- Short introduction about your creative work. -->
         <p class="hero-description">
           I create art, capture moments, and build interactive experiences.
           Take a look around and see what I've been working on.
         </p>
+
+        <!-- Buttons that jump to other parts of the website. -->
         <div class="hero-buttons">
-          <a class="button primary" href="#art-gallery">Explore my work ↗</a>
+          <a class="button primary" href="#art">Explore my work ↗</a>
           <a class="button secondary" href="#about">A little about me</a>
         </div>
       </div>
 
+      <!-- Decorative graphic on the right side of the home section. -->
       <div class="hero-art">
+        <!-- Decorative oval shapes created using CSS. -->
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
+
+        <!-- Placeholder logo made from text. You can replace it with art. -->
         <div class="hero-symbol">B<span>.</span></div>
+
+        <!-- Small floating labels around the logo. -->
         <span class="floating-tag tag-top">✦ Creative ideas</span>
         <span class="floating-tag tag-bottom">Made with curiosity</span>
       </div>
     </section>
 
+    <!-- ABOUT SECTION: Introduces you and your creative interests. -->
     <section class="section about-section" id="about">
       <p class="eyebrow">GET TO KNOW ME</p>
       <h2>A little about <span class="gradient-text">me.</span></h2>
+
       <p class="section-description">
         I'm a creative who enjoys bringing ideas to life through visuals,
         storytelling, and interactive design. I like experimenting,
@@ -62,6 +97,7 @@
       </p>
     </section>
 
+    <!-- WORK SECTION: Displays the three main portfolio categories. -->
     <section class="section work-section" id="art">
       <div class="section-heading">
         <div>
@@ -71,45 +107,61 @@
         <p class="muted">A collection of things I've made and learned.</p>
       </div>
 
+      <!-- Grid containing the three clickable portfolio cards. -->
       <div class="work-grid">
+
+        <!-- ART CARD: Links to the Art & Design section below. -->
         <a class="work-card" href="#art-gallery">
           <div class="card-art art-preview">
+            <!-- Temporary decorative symbol, not an actual project image. -->
             <span class="preview-symbol">✳</span>
             <span class="preview-label">01 / VISUAL ART</span>
           </div>
+
           <div class="card-info">
-            <div><h3>Art & Design</h3>
-              <p>Illustration, portraits, and digital work.</p></div>
+            <div>
+              <h3>Art & Design</h3>
+              <p>Illustration, portraits, and digital work.</p>
+            </div>
             <span class="card-arrow">↗</span>
           </div>
         </a>
 
+        <!-- PHOTOGRAPHY CARD: Links to the Photography section. -->
         <a class="work-card" href="#photo-gallery" id="photography">
           <div class="card-art photo-preview">
             <span class="preview-symbol">◎</span>
             <span class="preview-label">02 / PHOTOGRAPHY</span>
           </div>
+
           <div class="card-info">
-            <div><h3>Photography</h3>
-              <p>Real moments, people, and places.</p></div>
+            <div>
+              <h3>Photography</h3>
+              <p>Real moments, people, and places.</p>
+            </div>
             <span class="card-arrow">↗</span>
           </div>
         </a>
 
+        <!-- GAMES CARD: Links to the Games section. -->
         <a class="work-card" href="#game-gallery" id="games">
           <div class="card-art game-preview">
             <span class="preview-symbol">⌘</span>
             <span class="preview-label">03 / GAME DESIGN</span>
           </div>
+
           <div class="card-info">
-            <div><h3>Games</h3>
-              <p>Interactive stories, mechanics, and ideas.</p></div>
+            <div>
+              <h3>Games</h3>
+              <p>Interactive stories, mechanics, and ideas.</p>
+            </div>
             <span class="card-arrow">↗</span>
           </div>
         </a>
       </div>
     </section>
 
+    <!-- ART GALLERY: Add your actual art projects here later. -->
     <section class="section gallery-section" id="art-gallery">
       <p class="eyebrow">SELECTED PROJECTS</p>
       <h2>Art & Design</h2>
@@ -119,6 +171,7 @@
       </p>
     </section>
 
+    <!-- PHOTOGRAPHY GALLERY: Add your photography here later. -->
     <section class="section gallery-section" id="photo-gallery">
       <p class="eyebrow">THROUGH MY LENS</p>
       <h2>Photography</h2>
@@ -127,6 +180,7 @@
       </p>
     </section>
 
+    <!-- GAME GALLERY: Add your game projects and descriptions here. -->
     <section class="section gallery-section" id="game-gallery">
       <p class="eyebrow">PLAY · EXPERIMENT · CREATE</p>
       <h2>Games</h2>
@@ -135,19 +189,27 @@
       </p>
     </section>
 
+    <!-- CONTACT SECTION: Lets visitors contact you through email. -->
     <section class="section contact-section" id="contact">
       <p class="eyebrow">HAVE A PROJECT IN MIND?</p>
       <h2>Let's create something <span class="gradient-text">together.</span></h2>
+
       <p class="section-description">
         Interested in my work? Feel free to reach out.
       </p>
+
+      <!-- Replace the example address with your real email address. -->
       <a class="button primary" href="mailto:YOUR_EMAIL@example.com">
         Get in touch ↗
       </a>
-      <p class="muted small-note">Replace the email address with your own before publishing.</p>
+
+      <p class="muted small-note">
+        Replace the email address with your own before publishing.
+      </p>
     </section>
   </main>
 
+  <!-- FOOTER: Appears at the bottom of the website. -->
   <footer>
     <a class="logo" href="#home">B<span>.</span></a>
     <p>Designed and created by Bryan.</p>
